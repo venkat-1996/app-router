@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import "./globals.css";
+import { service } from "@/services";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,14 @@ ReactGA.initialize([
   },
 ]);
 
-export default function RootLayout({ children }) {
+const footerData = async () => {
+  const response = await service.listDocuments("64eed016d31c7e671109");
+  return response;
+};
+
+export default async function RootLayout({ children }) {
+  const footerInfo = await footerData();
+
   return (
     <html lang="en">
       <head>
@@ -48,7 +56,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Header />
         <div>{children}</div>
-        <Footer />
+        <Footer footerInfo={footerInfo} />
       </body>
     </html>
   );

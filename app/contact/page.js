@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-// import ReactGA from "react-ga4";
-import { event } from "../../lib/gtag";
+import { googleAnalytics } from "@/googleAnalytics";
+import { createDocument } from "@/services";
+import { service } from "@/services";
 
 function Contact() {
   const [name, setName] = useState("");
@@ -15,50 +16,24 @@ function Contact() {
     else setMessage(e.target.value);
   };
 
-  // ReactGA.initialize([
-  //   {
-  //     trackingId: process.env.GOOGLE_ANALYTICS_ID,
-  //   },
-  // ]);
-
   const saveDetails = () => {
-    dataLayer.push({
-      event: "send_contact_details",
-      name: name,
-      email: email,
-      message: message,
+    service.createDocument(
+      "64ed9a61178ef9013e5d",
+      "64ed9ac51f946e251bb0",
+      "64edc6bd2add40ed838c",
+      {
+        name: name,
+        email: email,
+        message: message,
+      }
+    );
+    googleAnalytics("send_contact_details", {
+      data: {
+        name: name,
+        email: email,
+        message: message,
+      },
     });
-    // console.log(ReactGA);
-    // ReactGA.event({
-    //   category: "button",
-    //   action: "send_contact_details",
-    //   label: "send_contact",
-    // });
-
-    // const graphqlEndpoint = 'https://graphql.contentful.com/content/v1/spaces/vekknjn8ofh7';
-    // const accessToken = 'U9BPDHgdXmRprZGo9ZqfgkEOh_9Am8yU9dG5ghifv00';
-
-    // const query = `
-    // query contactListEntryQuery {
-    //   contactList(id: "v4RMnXFt32EqWAXCiMecD") {
-    //     name
-    //     email
-    //     message
-    //   }
-    // }
-    // `;
-
-    // fetch(graphqlEndpoint, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${accessToken}`,
-    //   },
-    //   body: JSON.stringify({ query }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => console.log('Response:', data))
-    //   .catch(error => console.error('Error:', error));
   };
 
   return (

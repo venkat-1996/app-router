@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://graphql.contentful.com/content/v1/spaces/';
+export const BASE_URL = "https://cloud.appwrite.io/v1";

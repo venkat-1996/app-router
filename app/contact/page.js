@@ -10,7 +10,6 @@ function Contact() {
   const [message, setMessage] = useState("");
 
   const handleContactChange = (e) => {
-    console.log(e.target.value);
     if (e.target.id === "name") setName(e.target.value);
     else if (e.target.id === "email") setEmail(e.target.value);
     else setMessage(e.target.value);

@@ -31,6 +31,14 @@ export const service = {
     );
     return dataDriven(promise);
   },
+  getDocument: (collectionId, documentId) => {
+    const promise = databases.getDocument(
+      process.env.APP_WRITE_DB_ID,
+      collectionId,
+      documentId
+    );
+    return dataDriven(promise);
+  },
 };
 
 export const dataDriven = (promise) => {

@@ -15,6 +15,7 @@ const cardData = async () => {
 };
 
 async function Home() {
+  /* Data Driven */
   const homeInfo = await homeData();
   const cardItems = await cardData();
 

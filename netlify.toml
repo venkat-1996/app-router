@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*" # This applies to all paths, you can adjust it as needed
+  [headers.values]
+  Access-Control-Allow-Origin = "https://next-application.netlify.app/"

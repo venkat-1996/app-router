@@ -11,6 +11,10 @@ client
 
 export const service = {
   createDocument: (projectId, databaseId, collectionId, data) => {
+    // client.headers = `X-Appwrite-Project: ${projectId}`;
+    client["X-Appwrite-Project"] = projectId;
+    client["Access-Control-Allow-Origin"] = "*";
+    client["Content-Type"] = "application/json";
     client
       .setEndpoint(BASE_URL) // Your API Endpoint
       .setProject(projectId); // Your project ID
